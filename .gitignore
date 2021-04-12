@@ -1,0 +1,23 @@
+.DS_Store
+*.xcuserdatad
+*.xcscheme
+Pods/
+Gemfile.lock
+*.xcworkspace
+# fastlane/*.lock
+fastlane/README.md
+fastlane/report.xml
+Modulbank.app.dSYM.zip
+Modulbank.ipa
+/Gemfile
+xcschememanagement.plist
+/.idea/workspace.xml
+/.idea/encodings.xml
+/.idea/xcode.xml
+/Gemfile.lock
+/.idea
+/fastlane/README.md
+/fastlane/test_output
+/ModulbankTests/Swift/Mocks/*
+## User settings
+xcuserdata/
