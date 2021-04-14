@@ -1,24 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CombineAlgorithm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eU-9U-flg">
+                                <rect key="frame" x="350" y="150" width="36" height="30"/>
+                                <state key="normal" title="Send"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56q-IO-MOK">
+                                <rect key="frame" x="338" y="85" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="252" horizontalCompressionResistancePriority="737" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4At-lJ-sd6">
+                                <rect key="frame" x="20" y="148" width="322" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zV4-VU-eZj">
+                                <rect key="frame" x="20" y="85" width="123" height="30"/>
+                                <state key="normal" title="Change password"/>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Hei-hM-CiC">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4At-lJ-sd6" firstAttribute="top" secondItem="zV4-VU-eZj" secondAttribute="bottom" constant="33" id="0qg-19-7ae"/>
+                            <constraint firstItem="Hei-hM-CiC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="7gE-8L-4lJ"/>
+                            <constraint firstItem="Hei-hM-CiC" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="EiP-M8-uB6"/>
+                            <constraint firstItem="zV4-VU-eZj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="IVM-c4-Shy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8eU-9U-flg" secondAttribute="trailing" constant="28" id="L1O-Ht-eo6"/>
+                            <constraint firstItem="56q-IO-MOK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="41" id="R0M-4K-5ug"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="56q-IO-MOK" secondAttribute="trailing" constant="28" id="bw5-bd-SM2"/>
+                            <constraint firstItem="4At-lJ-sd6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nlc-4L-GPA"/>
+                            <constraint firstItem="8eU-9U-flg" firstAttribute="leading" secondItem="4At-lJ-sd6" secondAttribute="trailing" constant="8" symbolic="YES" id="tje-al-iss"/>
+                            <constraint firstItem="8eU-9U-flg" firstAttribute="centerY" secondItem="4At-lJ-sd6" secondAttribute="centerY" id="xho-1R-TzA"/>
+                            <constraint firstItem="zV4-VU-eZj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="41" id="yCl-UA-IwN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Hei-hM-CiC" id="lv5-jN-nF3"/>
+                        <outlet property="cancelButton" destination="56q-IO-MOK" id="7iq-LD-5lY"/>
+                        <outlet property="passwordTextInput" destination="4At-lJ-sd6" id="ShP-Te-vgc"/>
+                        <outlet property="sendPasswordButton" destination="8eU-9U-flg" id="Hil-je-Zq1"/>
+                        <outlet property="startChangeButton" destination="zV4-VU-eZj" id="gFf-jJ-lb8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-226.08695652173915" y="123.88392857142857"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
