@@ -63,6 +63,7 @@
 		84BE0D34262722EA0056F536 /* WeakStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakStorage.swift; sourceTree = "<group>"; };
 		84BE0D3C262739AF0056F536 /* ControlCombineListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCombineListener.swift; sourceTree = "<group>"; };
 		84BE0D412627DFDC0056F536 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
+		84BE0D532627FFDE0056F536 /* DataUpdates.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DataUpdates.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +102,7 @@
 		8492D413262482F10031B316 = {
 			isa = PBXGroup;
 			children = (
+				84BE0D532627FFDE0056F536 /* DataUpdates.playground */,
 				8492D41E262482F10031B316 /* CombineAlgorithm */,
 				8492D435262482F40031B316 /* CombineAlgorithmTests */,
 				8492D440262482F40031B316 /* CombineAlgorithmUITests */,
