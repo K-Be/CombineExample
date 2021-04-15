@@ -6,33 +6,29 @@
 //
 
 import Foundation
+import Combine
 
 protocol Cancellable: AnyObject {
     func cancel()
 }
 
-protocol BackendDelegate: AnyObject {
-    func backendLoadedPublicKey(_ key: String)
-    func backendChangedPassword()
-}
-
 class Backend {
-    weak var delegate: BackendDelegate?
-
-    func retrievePublicKey() -> BackendTaskStub {
-        let task = BackendTaskStub(withTime: 2.0) {
-            self.delegate?.backendLoadedPublicKey("Secret");
+    func retrievePublicKey() -> Future<String, Never> {
+        return Future { promise in
+            let task = BackendTaskStub(withTime: 2.0) {
+                promise(.success("Secret"))
+            }
+            task.resume()
         }
-        task.resume()
-        return task
     }
 
-    func retrievePasswordChanging(withPassword password:String, publicKey: String) -> BackendTaskStub {
-        let task = BackendTaskStub(withTime: 2.0) {
-            self.delegate?.backendChangedPassword()
+    func retrievePasswordChanging(withPassword password:String, publicKey: String) -> Future<Void, Never> {
+        return Future { promise in
+            let task = BackendTaskStub(withTime: 2.0) {
+                promise(.success( () ))
+            }
+            task.resume()
         }
-        task.resume()
-        return task
     }
 }
 

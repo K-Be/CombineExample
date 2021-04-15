@@ -6,17 +6,22 @@
 //
 
 import UIKit
+import Combine
 
-class ViewController: UIViewController, BackendDelegate, InputControllerDelegate {
+class ViewController: UIViewController {
     let backend = Backend()
     let inputController = InputController()
     let networkTasks = WeakStorage<BackendTaskStub>()
 
     @IBOutlet var startChangeButton: UIButton!
+    var startButtonListener = ControlCombineListener()
     @IBOutlet var sendPasswordButton: UIButton!
+    var sendPasswordButtonListener = ControlCombineListener()
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var passwordTextInput: UITextField!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
+    var disposeBag = DisposeBag()
 
     var publicKey: String = ""
 
@@ -34,33 +39,42 @@ class ViewController: UIViewController, BackendDelegate, InputControllerDelegate
             if self.state == .waitInput {
                 self.passwordTextInput.becomeFirstResponder()
             }
+
+            if self.state == .start {
+                self.disposeBag.cancelAll()
+                self.passwordTextInput.text = ""
+                self.buildAlgorithm()
+            }
         }
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.configure()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.configure()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.state = .start
+
         // Do any additional setup after loading the view.
-        self.backend.delegate = self
         self.inputController.textField = self.passwordTextInput
-        self.inputController.delegate = self
-        self.sendPasswordButton.addTarget(self, action: #selector(sendAction(_:)), for: .touchUpInside)
+        self.sendPasswordButtonListener.listenButton(self.sendPasswordButton)
         self.cancelButton.addTarget(self, action: #selector(cancelAction(_:)), for: .touchUpInside)
-        self.startChangeButton.addTarget(self, action: #selector(startChangeAction(_:)), for: .touchUpInside)
+        self.startButtonListener.listenButton(self.startChangeButton)
+        self.state = .start
     }
 
-    private func configure() {
-        self.backend.delegate = self
+    private func buildAlgorithm() {
+        let bag = self.disposeBag
+        self.startButtonListener.publisher.sink { [weak self] ( ) in
+            self?.loadPublicKey().sink { (key:String) in
+                self?.loadedPublicKey(key)
+                let future = self?.waitInputPassword()
+                future?.sink { (_) in
+                    self?.state = .sending
+                    self?.sendPasswordButtonListener.publisher.sink { () in
+                        self?.sendNewPassword().sink { () in
+                            self?.didSendPassword()
+                        }.store(in: bag)
+                    }.store(in: bag)
+                }.store(in: bag)
+            }.store(in: bag)
+        }.store(in: bag)
     }
 
     private func displayActivity(_ display: Bool) {
@@ -71,42 +85,42 @@ class ViewController: UIViewController, BackendDelegate, InputControllerDelegate
         }
     }
 
-    private func loadPublicKey() {
+    private func loadPublicKey() -> Future<String, Never> {
         self.displayActivity(true)
         let task = self.backend.retrievePublicKey()
-        self.networkTasks.addObject(task)
+        return task
     }
 
-    private func sendNewPassword() {
+    private func sendNewPassword() -> Future<Void, Never> {
         self.displayActivity(true)
         self.state = .sending
         let task = self.backend.retrievePasswordChanging(withPassword: self.passwordTextInput.text ?? "", publicKey: self.publicKey)
-        self.networkTasks.addObject(task)
+        return task
     }
 
-    // MARK: BackendDelegate
-    func backendLoadedPublicKey(_ key: String) {
+    fileprivate func loadedPublicKey(_ key: String) {
         self.publicKey = key
         self.displayActivity(false)
         self.state = .waitInput
     }
 
-    func backendChangedPassword() {
+    fileprivate func didSendPassword() {
         self.publicKey = ""
         self.displayActivity(false)
         self.state = .start
     }
 
-    // MARK: InputControllerDelegate
-    func inputController(_ sender: InputController, didInputText text: String) {
-        self.state = .sending
+    private func waitInputPassword() -> Future<String, Never> {
+        let bag = self.disposeBag
+        let future = Future<String, Never> { [weak self](promise) in
+            self?.inputController.publisher.sink { (value) in
+                promise(.success(value))
+            }.store(in: bag)
+        }
+        return future
     }
 
     // MARK: Actions
-    @objc func startChangeAction(_ sender: Any?) {
-        self.loadPublicKey()
-    }
-
     @objc func cancelAction(_ sender: Any?) {
         self.networkTasks.forEach { (task:BackendTaskStub) in
             task.cancel()
@@ -114,10 +128,6 @@ class ViewController: UIViewController, BackendDelegate, InputControllerDelegate
         self.networkTasks.removeAll()
         self.state = .start
         self.displayActivity(false)
-    }
-
-    @objc func sendAction(_ sender: Any?) {
-        self.sendNewPassword()
     }
 }
 

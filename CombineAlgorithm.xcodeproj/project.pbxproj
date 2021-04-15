@@ -20,6 +20,8 @@
 		8492D468262485CD0031B316 /* BackendTaskStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492D467262485CD0031B316 /* BackendTaskStub.swift */; };
 		84BE0D2F262722A80056F536 /* WeakContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE0D2E262722A80056F536 /* WeakContainer.swift */; };
 		84BE0D35262722EA0056F536 /* WeakStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE0D34262722EA0056F536 /* WeakStorage.swift */; };
+		84BE0D3D262739AF0056F536 /* ControlCombineListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE0D3C262739AF0056F536 /* ControlCombineListener.swift */; };
+		84BE0D422627DFDC0056F536 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE0D412627DFDC0056F536 /* DisposeBag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		8492D467262485CD0031B316 /* BackendTaskStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendTaskStub.swift; sourceTree = "<group>"; };
 		84BE0D2E262722A80056F536 /* WeakContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakContainer.swift; sourceTree = "<group>"; };
 		84BE0D34262722EA0056F536 /* WeakStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakStorage.swift; sourceTree = "<group>"; };
+		84BE0D3C262739AF0056F536 /* ControlCombineListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCombineListener.swift; sourceTree = "<group>"; };
+		84BE0D412627DFDC0056F536 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,8 @@
 			children = (
 				84BE0D2E262722A80056F536 /* WeakContainer.swift */,
 				84BE0D34262722EA0056F536 /* WeakStorage.swift */,
+				84BE0D3C262739AF0056F536 /* ControlCombineListener.swift */,
+				84BE0D412627DFDC0056F536 /* DisposeBag.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -298,12 +304,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				84BE0D2F262722A80056F536 /* WeakContainer.swift in Sources */,
+				84BE0D3D262739AF0056F536 /* ControlCombineListener.swift in Sources */,
 				84BE0D35262722EA0056F536 /* WeakStorage.swift in Sources */,
 				841DB2B32625E488007BAB33 /* InputController.swift in Sources */,
 				8492D460262483970031B316 /* Backend.swift in Sources */,
 				8492D424262482F10031B316 /* ViewController.swift in Sources */,
 				8492D420262482F10031B316 /* AppDelegate.swift in Sources */,
 				8492D468262485CD0031B316 /* BackendTaskStub.swift in Sources */,
+				84BE0D422627DFDC0056F536 /* DisposeBag.swift in Sources */,
 				8492D422262482F10031B316 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

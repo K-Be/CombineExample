@@ -7,11 +7,7 @@
 
 import Foundation
 import UIKit
-
-
-protocol InputControllerDelegate: AnyObject {
-    func inputController(_ sender: InputController, didInputText text: String)
-}
+import Combine
 
 class InputController: NSObject, UITextFieldDelegate {
     var textField: UITextField? {
@@ -24,12 +20,12 @@ class InputController: NSObject, UITextFieldDelegate {
             self.textField?.delegate = self
         }
     }
-    weak var delegate: InputControllerDelegate?
+    let publisher = PassthroughSubject<String, Never>()
 
     // MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textField?.resignFirstResponder()
-        self.delegate?.inputController(self, didInputText: textField.text ?? "")
+        self.publisher.send(textField.text ?? "")
         return true
     }
 
